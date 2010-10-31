@@ -2,6 +2,10 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "SmartKanaConverter.h"
 
+int main()
+{
+}
+
 @interface TestSmartKanaConverter: SenTestCase
 {
 }

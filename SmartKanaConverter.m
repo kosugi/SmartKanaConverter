@@ -4,14 +4,15 @@
 
 #import <Foundation/Foundation.h>
 #import "SmartKanaConverter.h"
-#import "SmartKanaConverter_define.m"
 
 #define HW_DAKUTEN    (0xFF9EU)
 #define HW_HANDAKUTEN (0xFF9FU)
 
-NSDictionary **maps_2f_kana[][3] = {
-    { &map_2f_hkana_pa, &map_2f_hkana_ba, &map_2f_hkana},
-    { &map_2f_kkana_pa, &map_2f_kkana_ba, &map_2f_kkana},
+#import "SmartKanaConverter_define.m"
+
+static NSDictionary **maps_2f_kana[][3] = {
+    { &map_2f_hkana_pa, &map_2f_hkana_ba, &map_2f_hkana },
+    { &map_2f_kkana_pa, &map_2f_kkana_ba, &map_2f_kkana },
 };
 
 @implementation SmartKanaConverter
@@ -68,9 +69,7 @@ NSDictionary **maps_2f_kana[][3] = {
 {
     static BOOL initialized = NO;
     if (!initialized) {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 #import "SmartKanaConverter_init.m"
-        [pool release];
         initialized = YES;
     }
 }

@@ -15,8 +15,8 @@ class Writer(object):
         self.fp_defn.write('static NSSet *%s;\n' % name)
         self.fp_init.write('%s = [[NSSet alloc] initWithObjects:\n' % name)
         for value in values:
-            self.fp_init.write('\t@"%s", \n' % escape(value))
-        self.fp_init.write('\tnil];\n')
+            self.fp_init.write('\t@"%s",\n' % escape(value))
+        self.fp_init.write('\tnil];\n\n')
 
     def make_map(self, name, lhs, rhs, fn):
         self.fp_defn.write('static NSDictionary *%s;\n' % name)

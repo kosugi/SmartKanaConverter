@@ -21,6 +21,12 @@ all: $(OBJS) $(TARGET).o
 clean:
 	$(RM) $(TARGET) $(OBJS)
 
+SmartKanaConverter_define.m: mktbl.py
+	python $^
+
+SmartKanaConverter_init.m: mktbl.py
+	python $^
+
 SmartKanaConverter.o: \
 SmartKanaConverter.m \
 SmartKanaConverter_define.m \
