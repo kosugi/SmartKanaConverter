@@ -34,13 +34,20 @@ enum {
     SKCONV_2H_HKANA = 1 << 8,
     SKCONV_2H_KKANA = 1 << 9,
 
+    // compose 濁点 and 半濁点 into one (use with SKCONV_2F_HKANA, SKCONV_2F_KKANA)
+    SKCONV_COMPOSE = 1 << 10,
+
     // converts halfwidth Katakana to fullwidth Hiragana/Katakana
-    SKCONV_2F_HKANA = 1 << 10,
-    SKCONV_2F_KKANA = 1 << 11,
+    SKCONV_2F_HKANA = 1 << 11,
+    SKCONV_2F_KKANA = 1 << 12,
+
+    // converts halfwidth Katakana to fullwidth Hiragana/Katakana with 濁点 composing
+    SKCONV_2F_HKANA_C = SKCONV_2F_HKANA | SKCONV_COMPOSE,
+    SKCONV_2F_KKANA_C = SKCONV_2F_KKANA | SKCONV_COMPOSE,
 
     // converts fullwidth Katakana/Hiragana to fullwidth Hiragana/Katakana
-    SKCONV_F2F_HKANA = 1 << 12,
-    SKCONV_F2F_KKANA = 1 << 13,
+    SKCONV_F2F_HKANA = 1 << 13,
+    SKCONV_F2F_KKANA = 1 << 14,
 };
 
 @interface SmartKanaConverter: NSObject

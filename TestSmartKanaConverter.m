@@ -15,6 +15,8 @@ int main()
 
 - (void)testNone
 {
+    STAssertEqualObjects([SmartKanaConverter convert:@" " withFlag:0], @" ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"　" withFlag:0], @"　", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"0" withFlag:0], @"0", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"０" withFlag:0], @"０", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"A" withFlag:0], @"A", nil);
@@ -23,9 +25,14 @@ int main()
     STAssertEqualObjects([SmartKanaConverter convert:@"ａ" withFlag:0], @"ａ", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"あ" withFlag:0], @"あ", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ア" withFlag:0], @"ア", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ー" withFlag:0], @"ー", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ｱ" withFlag:0], @"ｱ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"･" withFlag:0], @"･", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"#" withFlag:0], @"#", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"＃" withFlag:0], @"＃", nil);
+
+    STAssertEqualObjects([SmartKanaConverter convert:@"¥" withFlag:0], @"¥", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"￥" withFlag:0], @"￥", nil);
 }
 
 - (void)test_SKCONV_2H_SPC
@@ -40,7 +47,6 @@ int main()
 
 - (void)test_SKCONV_2H_NUM
 {
-    STAssertEqualObjects([SmartKanaConverter convert:@""   withFlag:SKCONV_2H_NUM], @"",  nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"０" withFlag:SKCONV_2H_NUM], @"0", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"１" withFlag:SKCONV_2H_NUM], @"1", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"２" withFlag:SKCONV_2H_NUM], @"2", nil);
@@ -55,7 +61,6 @@ int main()
 
 - (void)test_SKCONV_2F_NUM
 {
-    STAssertEqualObjects([SmartKanaConverter convert:@""  withFlag:SKCONV_2F_NUM], @"",   nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"0" withFlag:SKCONV_2F_NUM], @"０", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"1" withFlag:SKCONV_2F_NUM], @"１", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"2" withFlag:SKCONV_2F_NUM], @"２", nil);
@@ -92,6 +97,26 @@ int main()
     STAssertEqualObjects([SmartKanaConverter convert:@"0Az" withFlag:SKCONV_2F_ALNUM], @"０Ａｚ",  nil);
 }
 
+- (void)test_SKCONV_2H_SYM
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@"！＼／" withFlag:SKCONV_2H_SYM], @"!\\/",  nil);
+}
+
+- (void)test_SKCONV_2F_SYM
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@"!\\/" withFlag:SKCONV_2F_SYM], @"！＼／",  nil);
+}
+
+- (void)test_SKCONV_2H_ASCII
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@"　＃０Ａａ？" withFlag:SKCONV_2H_ASCII], @" #0Aa?",  nil);
+}
+
+- (void)test_SKCONV_2F_ASCII
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@" #0Aa?" withFlag:SKCONV_2F_ASCII], @"　＃０Ａａ？",  nil);
+}
+
 - (void)test_SKCONV_2H_HKANA
 {
     STAssertEqualObjects([SmartKanaConverter convert:@"ぁ" withFlag:SKCONV_2H_HKANA], @"ｧ",  nil);
@@ -113,8 +138,10 @@ int main()
     STAssertEqualObjects([SmartKanaConverter convert:@"ァ" withFlag:SKCONV_2F_HKANA], @"ァ",  nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ぁ" withFlag:SKCONV_2F_HKANA], @"ぁ",  nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ｧ"  withFlag:SKCONV_2F_HKANA], @"ぁ",  nil);
-    STAssertEqualObjects([SmartKanaConverter convert:@"ｶﾞ" withFlag:SKCONV_2F_HKANA], @"が",  nil);
-    STAssertEqualObjects([SmartKanaConverter convert:@"ﾊﾟ" withFlag:SKCONV_2F_HKANA], @"ぱ",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ｶﾞ" withFlag:SKCONV_2F_HKANA], @"か゛",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾊﾟ" withFlag:SKCONV_2F_HKANA], @"は゜",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ｶﾞ" withFlag:SKCONV_2F_HKANA_C], @"が",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾊﾟ" withFlag:SKCONV_2F_HKANA_C], @"ぱ",  nil);
 }
 
 - (void)test_SKCONV_2F_KKANA
@@ -122,8 +149,37 @@ int main()
     STAssertEqualObjects([SmartKanaConverter convert:@"ァ" withFlag:SKCONV_2F_KKANA], @"ァ",  nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ぁ" withFlag:SKCONV_2F_KKANA], @"ぁ",  nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ｧ"  withFlag:SKCONV_2F_KKANA], @"ァ",  nil);
-    STAssertEqualObjects([SmartKanaConverter convert:@"ｶﾞ" withFlag:SKCONV_2F_KKANA], @"ガ",  nil);
-    STAssertEqualObjects([SmartKanaConverter convert:@"ﾊﾟ" withFlag:SKCONV_2F_KKANA], @"パ",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ｶﾞ" withFlag:SKCONV_2F_KKANA], @"カ゛",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾊﾟ" withFlag:SKCONV_2F_KKANA], @"ハ゜",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ｶﾞ" withFlag:SKCONV_2F_KKANA_C], @"ガ",  nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾊﾟ" withFlag:SKCONV_2F_KKANA_C], @"パ",  nil);
+}
+
+- (void)test_SKCONV_F2F_HKANA
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@"ァ" withFlag:SKCONV_F2F_HKANA], @"ぁ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ヴ" withFlag:SKCONV_F2F_HKANA], @"ゔ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ー" withFlag:SKCONV_F2F_HKANA], @"ー", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ガ" withFlag:SKCONV_F2F_HKANA], @"が", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"パ" withFlag:SKCONV_F2F_HKANA], @"ぱ", nil);
+}
+
+- (void)test_SKCONV_F2F_KKANA
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@"ぁ" withFlag:SKCONV_F2F_KKANA], @"ァ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ゔ" withFlag:SKCONV_F2F_KKANA], @"ヴ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ー" withFlag:SKCONV_F2F_KKANA], @"ー", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"が" withFlag:SKCONV_F2F_KKANA], @"ガ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ぱ" withFlag:SKCONV_F2F_KKANA], @"パ", nil);
+}
+
+- (void)test_SKCONV_VARIATION
+{
+    NSString *s;
+    s = @"か゛";
+    s = [SmartKanaConverter convert:s withFlag:SKCONV_2H_HKANA];
+    s = [SmartKanaConverter convert:s withFlag:SKCONV_2F_KKANA_C];
+    STAssertEqualObjects(s, @"ガ", nil);
 }
 
 @end

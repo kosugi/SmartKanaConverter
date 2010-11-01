@@ -7,7 +7,7 @@ OBJS = SmartKanaConverter.o
 
 INCLUDES = -I.
 
-CFLAGS = -O2 -std=c99 -Wall $(INCLUDES)
+CFLAGS = -O2 -std=c99 -Wall $(INCLUDES) -fprofile-arcs -ftest-coverage
 LDFLAGS = -framework Foundation -framework AppKit -framework SenTestingKit
 
 .m.o:

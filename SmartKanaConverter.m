@@ -21,14 +21,14 @@ static NSDictionary **maps_2f_kana[][3] = {
 {
     NSUInteger len = [src length];
     NSMutableString *dst = [NSMutableString stringWithCapacity:(len * 2)];
-    for (NSUInteger n = 0U; n < len; ++n) {
+    for (NSUInteger n = 0; n < len; ++n) {
 
-        BOOL hasNext = n + 1 < len;
         NSString *cur = [src substringWithRange:NSMakeRange(n, 1)];
         NSString *rep;
 
         if ([set_hkkana member:cur]) {
-            unichar next = hasNext? [src characterAtIndex:(n + 1)]: 0U;
+            BOOL hasNext = n + 1 < len;
+            unichar next = (hasNext && flag & SKCONV_COMPOSE)? [src characterAtIndex:(n + 1)]: 0;
             NSDictionary ***map_2f_kana = nil;
             if (flag & SKCONV_2F_HKANA) {
                 map_2f_kana = maps_2f_kana[0];
@@ -52,6 +52,8 @@ static NSDictionary **maps_2f_kana[][3] = {
             (flag & SKCONV_2F_NUM    && (rep = [map_2f_num    objectForKey:cur])) ||
             (flag & SKCONV_2H_AL     && (rep = [map_2h_al     objectForKey:cur])) ||
             (flag & SKCONV_2F_AL     && (rep = [map_2f_al     objectForKey:cur])) ||
+            (flag & SKCONV_2H_SYM    && (rep = [map_2h_sym    objectForKey:cur])) ||
+            (flag & SKCONV_2F_SYM    && (rep = [map_2f_sym    objectForKey:cur])) ||
             (flag & SKCONV_2H_HKANA  && (rep = [map_2h_hkana  objectForKey:cur])) ||
             (flag & SKCONV_2H_KKANA  && (rep = [map_2h_kkana  objectForKey:cur])) ||
             (flag & SKCONV_F2F_HKANA && (rep = [map_f2f_hkana objectForKey:cur])) ||
