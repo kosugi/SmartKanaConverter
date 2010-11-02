@@ -1,4 +1,9 @@
+// -*- objc -*-
+// Copyright (c) 2010, KOSUGI Tomo
+// This software is licensed under the New BSD License.
+
 // THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
 static NSDictionary *map_2h_spc;
 static NSDictionary *map_2f_spc;
 static NSDictionary *map_2h_num;

@@ -1,4 +1,9 @@
+// -*- objc -*-
+// Copyright (c) 2010, KOSUGI Tomo
+// This software is licensed under the New BSD License.
+
 // THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
 map_2h_spc = [[NSDictionary alloc] initWithObjectsAndKeys:
 	@" ", @"　",
 	nil];

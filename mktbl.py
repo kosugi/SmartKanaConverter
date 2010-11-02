@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2010, KOSUGI Tomo
+# This software is licensed under the New BSD License.
+
+# mktbl.py creates conversion tables into:
+#   SmartKanaConverter_define.m
+#   SmartKanaConverter_init.m
 
 def escape(c):
     return c.replace('\\', '\\\\').replace('"', '\\"')
@@ -27,7 +33,13 @@ class Writer(object):
 
     def do(self):
 
-        msg = '// THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.\n'
+        msg = '''// -*- objc -*-
+// Copyright (c) 2010, KOSUGI Tomo
+// This software is licensed under the New BSD License.
+
+// THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
+'''
         self.fp_defn.write(msg)
         self.fp_init.write(msg)
 
@@ -45,8 +57,6 @@ class Writer(object):
         self.make_map('map_2h_al', FW_AL, HW_AL, ident)
         self.make_map('map_2f_al', HW_AL, FW_AL, ident)
 
-        # HW_SYM = u'''!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~¥'''
-        # FW_SYM = u'！”＃＄％＆’（）＊＋，−．／：；＜＝＞？＠［＼］＾＿‘｛｜｝〜￥'
         HW_SYM = make_str_in_range([u'!',  u'/'],  [u':',  u'@'],  [u'[',  u'`'],  [u'{',  u'}'])  + u'~'
         FW_SYM = make_str_in_range([u'！', u'／'], [u'：', u'＠'], [u'［', u'｀'], [u'｛', u'｝']) + u'〜'
         self.make_map('map_2h_sym', FW_SYM, HW_SYM, ident)

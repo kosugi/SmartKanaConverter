@@ -1,3 +1,7 @@
+// -*- objc -*-
+// Copyright (c) 2010, KOSUGI Tomo
+// This software is licensed under the New BSD License.
+
 #import <Foundation/Foundation.h>
 #import <SenTestingKit/SenTestingKit.h>
 #import "SmartKanaConverter.h"
