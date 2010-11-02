@@ -55,5 +55,6 @@ enum {
 }
 
 + (NSString *)convert:(NSString *)value withFlag:(int)flag;
++ (NSString *)convert:(NSString *)value withTable:(NSDictionary *)table;
 
 @end

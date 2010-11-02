@@ -67,6 +67,18 @@ static NSDictionary **maps_2f_kana[][3] = {
     return [NSString stringWithString:dst];
 }
 
++ (NSString *)convert:(NSString *)src withTable:(NSDictionary *)table
+{
+    NSUInteger len = [src length];
+    NSMutableString *dst = [NSMutableString stringWithCapacity:(len * 2)];
+    for (NSUInteger n = 0; n < len; ++n) {
+        NSString *cur = [src substringWithRange:NSMakeRange(n, 1)];
+        NSString *rep = [table objectForKey:cur];
+        [dst appendString:(rep? rep: cur)];
+    }
+    return [NSString stringWithString:dst];
+}
+
 + (void)initialize
 {
     static BOOL initialized = NO;

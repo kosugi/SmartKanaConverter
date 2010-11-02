@@ -186,4 +186,19 @@ int main()
     STAssertEqualObjects(s, @"ガ", nil);
 }
 
+- (void)test_convertWithTable1
+{
+    NSDictionary *table1 = [NSDictionary dictionaryWithObjectsAndKeys:@"¥", @"￥", nil];
+    STAssertEqualObjects([SmartKanaConverter convert:@"\\¥＼￥" withTable:table1], @"\\¥＼¥", nil);
+
+    NSDictionary *table2 = [NSDictionary dictionaryWithObjectsAndKeys:@"￥", @"¥", nil];
+    STAssertEqualObjects([SmartKanaConverter convert:@"\\¥＼￥" withTable:table2], @"\\￥＼￥", nil);
+}
+
+- (void)test_convertWithTable2
+{
+    NSDictionary *table1 = [NSDictionary dictionaryWithObjectsAndKeys:@"&amp;", @"&", @"&lt;", @"<", nil];
+    STAssertEqualObjects([SmartKanaConverter convert:@"&<&><>" withTable:table1], @"&amp;&lt;&amp;>&lt;>", nil);
+}
+
 @end
