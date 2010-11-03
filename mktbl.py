@@ -93,8 +93,8 @@ class Writer(object):
         self.make_map('map_f2f_kkana', FW_HKANA, FW_KKANA, ident)
 
     def write(self):
-        self.fp_defn = file('SmartKanaConverter_define.m', 'w')
-        self.fp_init = file('SmartKanaConverter_init.m', 'w')
+        self.fp_defn = file('src/SmartKanaConverter_define.m', 'w')
+        self.fp_init = file('src/SmartKanaConverter_init.m', 'w')
         self.do()
         self.fp_defn.close()
         self.fp_init.close()

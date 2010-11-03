@@ -1,5 +1,5 @@
-TestSmartKanaConverter
 *.o
 *.gcda
 *.gcno
 *.gcov
+build/
