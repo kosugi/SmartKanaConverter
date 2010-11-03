@@ -1,0 +1,19 @@
+SmartKanaConverter is a string converter like mb_convert_kana
+function in PHP that converts japanese fullwidth/halfwidth
+Hiragana/Katakana mutualy.
+
+INSTALLATION
+
+  1. copy src/* into your project.
+  2. add SmartKanaConverter.[hm] into your project.
+     SmartKanaConverter_*.m files can't to be compiled individually and don't add.
+
+
+USAGE
+
+  see test/TestSmartKanaConverter.m
+
+
+CONVERSION RULES
+
+  see src/SmartKanaConverter_init.m
