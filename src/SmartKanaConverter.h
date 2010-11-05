@@ -1,4 +1,4 @@
-// -*- objc -*-
+// -*- mode: objc; coding: utf-8 -*-
 // Copyright (c) 2010, KOSUGI Tomo
 // This software is licensed under the New BSD License.
 
