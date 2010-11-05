@@ -1,4 +1,4 @@
-// -*- objc -*-
+// -*- mode: objc; coding: utf-8 -*-
 // Copyright (c) 2010, KOSUGI Tomo
 // This software is licensed under the New BSD License.
 
@@ -184,6 +184,17 @@ int main()
     s = [SmartKanaConverter convert:s withFlag:SKCONV_2H_HKANA];
     s = [SmartKanaConverter convert:s withFlag:SKCONV_2F_KKANA_C];
     STAssertEqualObjects(s, @"ガ", nil);
+
+    int flag;
+    flag = SKCONV_2H_ASCII | SKCONV_2F_KKANA_C;
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾔﾊﾞｲ｡ＲＴ　http://ｙｊ．ｐｎ／" withFlag:flag], @"ヤバイ。RT http://yj.pn/", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾀﾀﾞｲﾏ＞" withFlag:flag], @"タダイマ>", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"＿ﾉ乙(､ﾝ､)＿" withFlag:flag], @"_ノ乙(、ン、)_", nil);
+
+    flag = SKCONV_2F_ASCII | SKCONV_2F_HKANA_C;
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾔﾊﾞｲ｡ＲＴ　http://ｙｊ．ｐｎ／" withFlag:flag], @"やばい。ＲＴ　ｈｔｔｐ：／／ｙｊ．ｐｎ／", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾀﾀﾞｲﾏ＞" withFlag:flag], @"ただいま＞", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"＿ﾉ乙(､ﾝ､)＿" withFlag:flag], @"＿の乙（、ん、）＿", nil);
 }
 
 - (void)test_convertWithTable1
