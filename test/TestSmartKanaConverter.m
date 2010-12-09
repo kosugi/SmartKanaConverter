@@ -212,4 +212,11 @@ int main()
     STAssertEqualObjects([SmartKanaConverter convert:@"&<&><>" withTable:table1], @"&amp;&lt;&amp;>&lt;>", nil);
 }
 
+
+- (void)test_wa
+{
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾜ" withFlag:SKCONV_2F_HKANA], @"わ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾜ" withFlag:SKCONV_2F_KKANA], @"ワ", nil);
+}
+
 @end
