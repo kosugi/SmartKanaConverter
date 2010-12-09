@@ -6,6 +6,8 @@
 #   SmartKanaConverter_define.m
 #   SmartKanaConverter_init.m
 
+import codecs
+
 def escape(c):
     return c.replace('\\', '\\\\').replace('"', '\\"')
 
@@ -81,9 +83,9 @@ class Writer(object):
         self.make_map('map_2f_hkana_ba', HW_KKANA_BA, u'がぎぐげござじずぜぞだぢづでどばびぶべぼゔ', ident)
         self.make_map('map_2f_kkana_ba', HW_KKANA_BA, u'ガギグゲゴザジズゼゾダヂヅデドバビブベボヴ', ident)
 
-        HW_KKANA_2F = u"ｧｱｨｲｩｳｪｴｫｵｶｷｸｹｺｻｼｽｾｿﾀﾁｯﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜﾜｦﾝﾞﾟ･ｰ｢｣｡､"
-        FW_HKANA_2F = u"ぁあぃいぅうぇえぉおかきくけこさしすせそたちっつてとなにぬねのはひふへほまみむめもゃやゅゆょよらりるれろゎわをん゛゜・ー「」。、"
-        FW_KKANA_2F = u"ァアィイゥウェエォオカキクケコサシスセソタチッツテトナニヌネノハヒフヘホマミムメモャヤュユョヨラリルレロヮワヲン゛゜・ー「」。、"
+        HW_KKANA_2F = u"ｧｱｨｲｩｳｪｴｫｵｶｷｸｹｺｻｼｽｾｿﾀﾁｯﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝﾞﾟ･ｰ｢｣｡､"
+        FW_HKANA_2F = u"ぁあぃいぅうぇえぉおかきくけこさしすせそたちっつてとなにぬねのはひふへほまみむめもゃやゅゆょよらりるれろわをん゛゜・ー「」。、"
+        FW_KKANA_2F = u"ァアィイゥウェエォオカキクケコサシスセソタチッツテトナニヌネノハヒフヘホマミムメモャヤュユョヨラリルレロワヲン゛゜・ー「」。、"
         self.make_map('map_2f_hkana', HW_KKANA_2F, FW_HKANA_2F, ident)
         self.make_map('map_2f_kkana', HW_KKANA_2F, FW_KKANA_2F, ident)
 
@@ -93,8 +95,8 @@ class Writer(object):
         self.make_map('map_f2f_kkana', FW_HKANA, FW_KKANA, ident)
 
     def write(self):
-        self.fp_defn = file('src/SmartKanaConverter_define.m', 'w')
-        self.fp_init = file('src/SmartKanaConverter_init.m', 'w')
+        self.fp_defn = codecs.open('src/SmartKanaConverter_define.m', 'w', 'UTF-8')
+        self.fp_init = codecs.open('src/SmartKanaConverter_init.m', 'w', 'UTF-8')
         self.do()
         self.fp_defn.close()
         self.fp_init.close()
