@@ -217,6 +217,10 @@ int main()
 {
     STAssertEqualObjects([SmartKanaConverter convert:@"ﾜ" withFlag:SKCONV_2F_HKANA], @"わ", nil);
     STAssertEqualObjects([SmartKanaConverter convert:@"ﾜ" withFlag:SKCONV_2F_KKANA], @"ワ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾜｰｲ" withFlag:SKCONV_2F_HKANA], @"わーい", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"ﾜｰｲ" withFlag:SKCONV_2F_KKANA], @"ワーイ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"わゎワヮ〜いイ" withFlag:SKCONV_2H_HKANA], @"ﾜゎワヮ〜ｲイ", nil);
+    STAssertEqualObjects([SmartKanaConverter convert:@"わゎワヮ〜いイ" withFlag:SKCONV_2H_KKANA], @"わゎﾜヮ〜いｲ", nil);
 }
 
 @end
